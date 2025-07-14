@@ -30,7 +30,7 @@ if __name__ == "__main__":
     urls_categorias = extraer_url_categorias_general(html)
     driver.quit()
 
-    for url in urls_categorias[16:]:
+    for url in urls_categorias:
         print("********************************************************************")
         print(f"Procesando URL de categoría: {url}")
         driver = configurar_driver()
@@ -40,7 +40,7 @@ if __name__ == "__main__":
         html = driver.page_source
         urls_categorias_e = extraer_url_categorias_especifico(html)
 
-        for url_e in urls_categorias_e[0:]:
+        for url_e in urls_categorias_e:
             print("------------------------------------------------------------------")
             print(f"Procesando URL de categoría: {url_e}")
             driver.get(url_e)
@@ -92,48 +92,6 @@ if __name__ == "__main__":
                 else:
                     print(f"Error al insertar producto: {res.status_code}, {res.text}")
         driver.quit()
-
-    # //////////////////////////////////////////////////////////
-    # PRUEBAS CON dia_producto.html
-    # with open("dia_producto.html", "r", encoding="utf-8") as f:
-    #     html = f.read()
-    # data_nutricional, name, price, price_per_unit, ingredients = extraer_info_nutricional(html)
-    # valores_float = {
-    # k: float(v) if re.match(r'^-?\d+(\.\d+)?$', v) else 0.0
-    # for k, v in data_nutricional.items()
-    # }
-    # print(f"Nombre: {name}, Precio: {price}, Precio por unidad: {price_per_unit}, Ingredientes: {ingredients}")
-    # print(f"Valores nutricionales: {valores_float}")
-    # headers = {
-    #     "apikey": SUPABASE_KEY,
-    #     "Authorization": f"Bearer {SUPABASE_KEY}",
-    #     "Content-Type": "application/json",
-    #     "Prefer": "return=representation"
-    # }
-
-    # data = {
-    # "nombre": name,
-    # "supermercado": "Dia",
-    # "precio": price,
-    # "precio_por_unidad": price_per_unit,
-    # "ingredientes": ingredients,
-    # "valor_energetico": valores_float.get('valor_energetico', 0),
-    # "grasas": valores_float.get('grasas', 0),
-    # "hidratos": valores_float.get('hidratos_de_carbono', 0),
-    # "azucares": valores_float.get('azucares', 0),
-    # "proteinas": valores_float.get('proteinas', 0),
-    # "sal": valores_float.get('sal', 0),
-    # "url_producto": "url_p"
-    # }
-
-    # res = requests.post(
-    #     f"{SUPABASE_URL}/rest/v1/productos_dia", 
-    #     headers=headers,
-    #     json=data
-    # )
-    # print(res.json())
-    # print(res.status_code)
-
 
 
     
